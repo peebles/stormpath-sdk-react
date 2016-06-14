@@ -24,7 +24,7 @@ Stormpath already integrated!*
 1. **Install React Router**
 
   The Stormpath module is only compatible with [React Router][], so ensure that your application is using it.
-  
+
 2. **Integrate Your Back-End**
 
   This module requires Stormpath on your back-end to work properly. At the moment we
@@ -35,23 +35,23 @@ Stormpath already integrated!*
 3. **Install the SDK**
 
   Download and include [stormpath-sdk-react.min.js][] in your *index.html* file.
-  
+
   ```html
   <script src="stormpath-sdk-react.min.js"></script>
   ```
 
   Or install with bower:
-  
+
   ```term
   $ bower install react-stormpath --save
   ```
-  
+
   Or install with npm:
-  
+
   ```term
   $ npm install react-stormpath --save
   ```
-  
+
   Then depending on how you load the library, access it as shown below:
 
   ```javascript
@@ -63,7 +63,7 @@ Stormpath already integrated!*
   var Router = require('react-stormpath').Router;
   var AuthenticatedRoute = require('react-stormpath').AuthenticatedRoute;
   var LoginLink = require('react-stormpath').LoginLink;
-  
+
   // Or if you are using it from a browser without UMD.
   var Router = ReactStormpath.Router;
   var AuthenticatedRoute = ReactStormpath.AuthenticatedRoute;
@@ -73,7 +73,7 @@ Stormpath already integrated!*
 4. **Initialize the SDK**
 
   Before calling `React.render()` be sure to call [`ReactStormpath.init()`][].  This sets up the SDK so that it's ready to be used.
-  
+
   ```javascript
   ReactStormpath.init({
     // Optional: Set if you want to use your own Flux dispatcher.
@@ -84,10 +84,10 @@ Stormpath already integrated!*
 5. **Configure the Router**
 
   In the file where you setup your [React Router][] routes, change your [`ReactRouter.Router`][] to [`ReactStormpath.Router`][] as shown below:
-  
+
   ```html
   import { Router } from 'react-stormpath';
-  
+
   ReactDOM.render(
     <Router history={browserHistory}>
       <Route path='/' component={MainPage} />
@@ -99,13 +99,13 @@ Stormpath already integrated!*
 6. **Setup your Routes**
 
   Start by adding a route that people can go to in order to sign up. This will just be a regular [`ReactRouter.Route`][]. Then once you've done this, create a view for your route called `RegistrationPage` and add the [`RegistrationForm`][] component to it. This will render a registration form and allow people to sign up.
-  
+
   ```html
   <Route path='/register' component={RegistrationPage} />
   ```
 
   Now when we have our registration done, let's add a [`LoginRoute`][] so that our users can log in. This route is special, since it tells the router where to go when you access a [`AuthenticatedRoute`][] without being authenticated. Once you've added the route, create a view for your route called `LoginPage` and add the [`LoginForm`][] component to it. The [`LoginForm`][] component will render a username and password login form so that your users can log in.
-  
+
   ```html
   <LoginRoute path='/login' component={LoginPage} />
   ```
@@ -137,7 +137,7 @@ Stormpath already integrated!*
   ```html
   <LoginLink>Login</LoginLink>
   ```
-  
+
   Use the [`LogoutLink`][] component to navigate your users to the [`LogoutLink`][] route and thereby end your session:
 
   ```html
@@ -185,6 +185,26 @@ This module can be used with Browserify.  Please add the following lines to your
 "browser": {
   "stormpath": "./node_modules/react-stormpath/dist/stormpath-sdk-react.min.js"
 }
+```
+
+## Build
+
+Build cjs/es6/umd/min (but not dist):
+
+```term
+$ npm run build
+```
+
+Build `/dist` files (do this before creating a release):
+
+```term
+$ npm run build-dist
+```
+
+Only build CommonJS-files. This is what you'll use during development:
+
+```term
+$ npm run build-cjs
 ```
 
 ## Help
