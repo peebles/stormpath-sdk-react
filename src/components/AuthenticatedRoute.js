@@ -14,7 +14,7 @@ export default class AuthenticatedRoute extends Route {
           var loginRoute = router.getLoginRoute();
           var redirectTo = (loginRoute || {}).path || (homeRoute || {}).path || '/';
 
-          replace(redirectTo);
+          replace({ nextPathname: nextState.location.pathname }, redirectTo);
         }
         callback();
       });

@@ -153,7 +153,6 @@ export default class LoginForm extends React.Component {
 
   onFormSubmit(e) {
     e.preventDefault();
-    e.persist();
 
     var next = (err, data) => {
       if (err) {
@@ -198,7 +197,13 @@ export default class LoginForm extends React.Component {
     var router = context.getRouter();
     var homeRoute = router.getHomeRoute();
     var authenticatedHomeRoute = router.getAuthenticatedHomeRoute();
-    var redirectTo = this.props.redirectTo || (authenticatedHomeRoute || {}).path || (homeRoute || {}).path || '/';
+    var logoutRoute = router.getLogoutRoute();
+    
+    var { location } = this.props;
+    var passthru = (location && location.state) ? location.state.nextPathname : null;
+    if ( passthru == ( logoutRoute || {} ).path ) passthru = null;
+
+    var redirectTo = this.props.redirectTo || passthru || (authenticatedHomeRoute || {}).path || (homeRoute || {}).path || '/';
 
     this.context.router.push(redirectTo);
   }
