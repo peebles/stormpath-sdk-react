@@ -153,7 +153,8 @@ export default class LoginForm extends React.Component {
 
   onFormSubmit(e) {
     e.preventDefault();
-
+    e.persist();
+    
     var next = (err, data) => {
       if (err) {
         return this.setState({
